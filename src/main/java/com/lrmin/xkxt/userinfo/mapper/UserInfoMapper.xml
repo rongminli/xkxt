@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lrmin.xkxt.userinfo.mapper.UserInfoMapper"> 
+
+<resultMap id="BaseResultMap" type="com.lrmin.xkxt.userinfo.entity.UserInfo"> 
+	<id column="id" property="id" jdbcType="VARCHAR"/> 
+	<result column="create_at" property="createAt" jdbcType="TIMESTAMP"/> 
+	<result column="last_update_at" property="lastUpdateAt" jdbcType="TIMESTAMP"/> 
+	<result column="version" property="version" jdbcType="INTEGER"/> 
+	<result column="account_id" property="accountId" jdbcType="VARCHAR"/> 
+	<result column="name" property="name" jdbcType="VARCHAR"/> 
+	<result column="native_place" property="nativePlace" jdbcType="VARCHAR"/> 
+	<result column="phone" property="phone" jdbcType="VARCHAR"/> 
+	<result column="email" property="email" jdbcType="VARCHAR"/> 
+	<result column="address" property="address" jdbcType="VARCHAR"/> 
+	<result column="avater" property="avater" jdbcType="VARCHAR"/> 
+</resultMap> 
+
+<sql id="baseClumList"> id, create_at, last_update_at, version, account_id, name, native_place, phone, email, address, avater  </sql> 
+
+<insert id="insert"> 
+	INSERT INTO T_USERS_INFO( <include refid="baseClumList"/> ) VALUES( 
+		#{id,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{lastUpdateAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{accountId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{avater,jdbcType=VARCHAR} 
+	) 
+</insert> 
+
+<insert id="insertSelective"> 
+	INSERT INTO T_USERS_INFO
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> id, </if> 
+		<if test="createAt!= null"> create_at, </if> 
+		<if test="lastUpdateAt!= null"> last_update_at, </if> 
+		<if test="version!= null"> version, </if> 
+		<if test="accountId!= null"> account_id, </if> 
+		<if test="name!= null"> name, </if> 
+		<if test="nativePlace!= null"> native_place, </if> 
+		<if test="phone!= null"> phone, </if> 
+		<if test="email!= null"> email, </if> 
+		<if test="address!= null"> address, </if> 
+		<if test="avater!= null"> avater, </if> 
+	</trim> 
+	VALUES 
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> #{id,jdbcType=VARCHAR}, </if> 
+		<if test="createAt!= null"> #{createAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="lastUpdateAt!= null"> #{lastUpdateAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="version!= null"> #{version,jdbcType=INTEGER}, </if> 
+		<if test="accountId!= null"> #{accountId,jdbcType=VARCHAR}, </if> 
+		<if test="name!= null"> #{name,jdbcType=VARCHAR}, </if> 
+		<if test="nativePlace!= null"> #{nativePlace,jdbcType=VARCHAR}, </if> 
+		<if test="phone!= null"> #{phone,jdbcType=VARCHAR}, </if> 
+		<if test="email!= null"> #{email,jdbcType=VARCHAR}, </if> 
+		<if test="address!= null"> #{address,jdbcType=VARCHAR}, </if> 
+		<if test="avater!= null"> #{avater,jdbcType=VARCHAR}, </if> 
+	</trim> 
+</insert> 
+
+<delete id="deleteById">
+	DELETE FROM T_USERS_INFO WHERE id=#{id,jdbcType=VARCHAR}
+</delete> 
+
+<update id="update"> 
+	UPDATE T_USERS_INFO set id=#{id,jdbcType=VARCHAR},create_at=#{createAt,jdbcType=TIMESTAMP},last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP},version=#{version,jdbcType=INTEGER},account_id=#{accountId,jdbcType=VARCHAR},name=#{name,jdbcType=VARCHAR},native_place=#{nativePlace,jdbcType=VARCHAR},phone=#{phone,jdbcType=VARCHAR},email=#{email,jdbcType=VARCHAR},address=#{address,jdbcType=VARCHAR},avater=#{avater,jdbcType=VARCHAR} where id=#{id}
+</update> 
+
+<update id="updateSelective"> 
+	UPDATE T_USERS_INFO set
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> version=#{version,jdbcType=INTEGER}, </if>
+		<if test="accountId!= null"> account_id=#{accountId,jdbcType=VARCHAR}, </if>
+		<if test="name!= null"> name=#{name,jdbcType=VARCHAR}, </if>
+		<if test="nativePlace!= null"> native_place=#{nativePlace,jdbcType=VARCHAR}, </if>
+		<if test="phone!= null"> phone=#{phone,jdbcType=VARCHAR}, </if>
+		<if test="email!= null"> email=#{email,jdbcType=VARCHAR}, </if>
+		<if test="address!= null"> address=#{address,jdbcType=VARCHAR}, </if>
+		<if test="avater!= null"> avater=#{avater,jdbcType=VARCHAR}, </if>
+	</trim>
+	where id=#{id}
+</update> 
+
+<select id="findAll" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_INFO
+</select> 
+
+<select id="findById" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_INFO where id=#{id}
+</select> 
+
+<select id="findBy" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_INFO where 1=1
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> AND id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> AND create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> AND last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> AND version=#{version,jdbcType=INTEGER}, </if>
+		<if test="accountId!= null"> AND account_id=#{accountId,jdbcType=VARCHAR}, </if>
+		<if test="name!= null"> AND name=#{name,jdbcType=VARCHAR}, </if>
+		<if test="nativePlace!= null">AND native_place=#{nativePlace,jdbcType=VARCHAR}, </if>
+		<if test="phone!= null"> AND phone=#{phone,jdbcType=VARCHAR}, </if>
+		<if test="email!= null"> AND email=#{email,jdbcType=VARCHAR}, </if>
+		<if test="address!= null"> AND address=#{address,jdbcType=VARCHAR}, </if>
+		<if test="avater!= null"> AND avater=#{avater,jdbcType=VARCHAR}, </if>
+	</trim>
+</select> 
+
+</mapper>

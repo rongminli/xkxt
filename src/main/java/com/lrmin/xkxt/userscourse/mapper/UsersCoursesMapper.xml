@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lrmin.xkxt.userscourse.mapper.UsersCoursesMapper"> 
+
+<resultMap id="BaseResultMap" type="com.lrmin.xkxt.userscourse.entity.UsersCourses"> 
+	<id column="id" property="id" jdbcType="VARCHAR"/> 
+	<result column="create_at" property="createAt" jdbcType="TIMESTAMP"/> 
+	<result column="last_update_at" property="lastUpdateAt" jdbcType="TIMESTAMP"/> 
+	<result column="version" property="version" jdbcType="INTEGER"/> 
+	<result column="account_id" property="accountId" jdbcType="VARCHAR"/> 
+	<result column="course_id" property="courseId" jdbcType="VARCHAR"/> 
+</resultMap> 
+
+<sql id="baseClumList"> id, create_at, last_update_at, version, account_id, course_id  </sql> 
+
+<insert id="insert"> 
+	INSERT INTO T_USERS_COURSES( <include refid="baseClumList"/> ) VALUES( 
+		#{id,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{lastUpdateAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{accountId,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR} 
+	) 
+</insert> 
+
+<insert id="insertSelective"> 
+	INSERT INTO T_USERS_COURSES
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> id, </if> 
+		<if test="createAt!= null"> create_at, </if> 
+		<if test="lastUpdateAt!= null"> last_update_at, </if> 
+		<if test="version!= null"> version, </if> 
+		<if test="accountId!= null"> account_id, </if> 
+		<if test="courseId!= null"> course_id, </if> 
+	</trim> 
+	VALUES 
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> #{id,jdbcType=VARCHAR}, </if> 
+		<if test="createAt!= null"> #{createAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="lastUpdateAt!= null"> #{lastUpdateAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="version!= null"> #{version,jdbcType=INTEGER}, </if> 
+		<if test="accountId!= null"> #{accountId,jdbcType=VARCHAR}, </if> 
+		<if test="courseId!= null"> #{courseId,jdbcType=VARCHAR}, </if> 
+	</trim> 
+</insert> 
+
+<delete id="deleteById">
+	DELETE FROM T_USERS_COURSES WHERE id=#{id,jdbcType=VARCHAR}
+</delete>
+
+<delete id="deleteBy">
+	DELETE FROM T_USERS_COURSES WHERE 1=1
+	<trim prefix="" suffix="" suffixOverrides="," >
+		<if test="id!= null"> AND id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> AND create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> AND last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> AND version=#{version,jdbcType=INTEGER}, </if>
+		<if test="accountId!= null"> AND account_id=#{accountId,jdbcType=VARCHAR}, </if>
+		<if test="courseId!= null"> AND course_id=#{courseId,jdbcType=VARCHAR}, </if>
+	</trim>
+</delete>
+
+<update id="update"> 
+	UPDATE T_USERS_COURSES set id=#{id,jdbcType=VARCHAR},create_at=#{createAt,jdbcType=TIMESTAMP},last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP},version=#{version,jdbcType=INTEGER},account_id=#{accountId,jdbcType=VARCHAR},course_id=#{courseId,jdbcType=VARCHAR} where id=#{id}
+</update> 
+
+<update id="updateSelective"> 
+	UPDATE T_USERS_COURSES set
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> version=#{version,jdbcType=INTEGER}, </if>
+		<if test="accountId!= null"> account_id=#{accountId,jdbcType=VARCHAR}, </if>
+		<if test="courseId!= null"> course_id=#{courseId,jdbcType=VARCHAR}, </if>
+	</trim>
+	where id=#{id}
+</update> 
+
+<select id="findAll" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_COURSES
+</select> 
+
+<select id="findById" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_COURSES where id=#{id}
+</select> 
+
+<select id="findBy" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_COURSES where 1=1
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> AND id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> AND create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> AND last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> AND version=#{version,jdbcType=INTEGER}, </if>
+		<if test="accountId!= null"> AND account_id=#{accountId,jdbcType=VARCHAR}, </if>
+		<if test="courseId!= null"> AND course_id=#{courseId,jdbcType=VARCHAR}, </if>
+	</trim>
+</select> 
+
+<select id="search" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_COURSES
+	where 1=1
+</select>
+
+<select id="getCoursesByAccountId" resultType="com.lrmin.xkxt.course.entity.Course">
+	select c.*
+	from t_users_courses uc
+	    JOIN t_course c ON uc.account_id=#{accountId,jdbcType=VARCHAR} AND uc.course_id = c.id
+</select>
+
+<select id="getCoursesByAccountIdRev" resultType="com.lrmin.xkxt.course.entity.Course">
+	select c.*
+	from t_users_courses uc
+	RIGHT JOIN t_course c ON  uc.course_id = c.id
+	WHERE uc.account_id != #{accountId,jdbcType=VARCHAR} OR uc.course_id IS NULL
+</select>
+<select id="conflictCheck" resultType="com.lrmin.xkxt.course.entity.Course">
+	WITH this_course AS (
+	    SELECT c.start c_sart, cr.start cr_start
+	    FROM t_course c
+		JOIN t_course_rgt cr on c.id = cr.course_id AND c.id = #{courseId}
+
+	WHERE id = #{courseId})
+	select c.*
+	from t_users_courses uc
+		RIGHT JOIN t_course c ON uc.account_id = #{accountId,jdbcType=VARCHAR} AND uc.course_id = c.id
+		JOIN t_course_rgt cr ON cr.course_id = c.id
+	WHERE
+		this_course.c_sart BETWEEN  c.start AND c.end
+		AND this_course.cr_start  BETWEEN  cr.start AND cr.end
+</select>
+
+</mapper>

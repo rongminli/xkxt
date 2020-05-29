@@ -1,0 +1,24 @@
+package com.lrmin.xkxt.userinfo.mapper;
+
+import org.apache.ibatis.annotations.Mapper; 
+import java.util.List;
+import com.lrmin.xkxt.userinfo.entity.UserInfo;
+
+@Mapper 
+public interface UserInfoMapper {
+
+	public Long insert(UserInfo obj); 
+
+	public Long insertSelective(UserInfo obj); 
+
+	public Long deleteById(String id); 
+
+	public Long update(UserInfo obj); 
+
+	public Long updateSelective(UserInfo obj); 
+
+	public List<UserInfo> findAll(); 
+
+	public List<UserInfo> findById(String id); 
+
+}

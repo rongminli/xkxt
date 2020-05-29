@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lrmin.xkxt.account.mapper.AccountMapper">
+
+<resultMap id="BaseResultMap" type="com.lrmin.xkxt.account.entity.Account">
+	<id column="id" property="id" jdbcType="VARCHAR"/> 
+	<result column="create_at" property="createAt" jdbcType="TIMESTAMP"/> 
+	<result column="last_update_at" property="lastUpdateAt" jdbcType="TIMESTAMP"/> 
+	<result column="version" property="version" jdbcType="INTEGER"/> 
+	<result column="name" property="name" jdbcType="VARCHAR"/> 
+	<result column="nickname" property="nickname" jdbcType="VARCHAR"/> 
+	<result column="password" property="password" jdbcType="VARCHAR"/> 
+	<result column="registration_at" property="registrationAt" jdbcType="TIMESTAMP"/> 
+</resultMap> 
+
+<sql id="baseClumList"> id, create_at, last_update_at, version, name, nickname, password, registration_at  </sql> 
+
+<insert id="insert">
+	INSERT INTO S_ACCOUNTS( <include refid="baseClumList"/> ) VALUES( 
+		#{id,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{lastUpdateAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{registrationAt,jdbcType=TIMESTAMP} 
+	) 
+</insert> 
+
+<insert id="insertSelective"> 
+	INSERT INTO S_ACCOUNTS
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> id, </if> 
+		<if test="createAt!= null"> create_at, </if> 
+		<if test="lastUpdateAt!= null"> last_update_at, </if> 
+		<if test="version!= null"> version, </if> 
+		<if test="name!= null"> name, </if> 
+		<if test="nickname!= null"> nickname, </if> 
+		<if test="password!= null"> password, </if> 
+		<if test="registrationAt!= null"> registration_at, </if> 
+	</trim> 
+	VALUES 
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> #{id,jdbcType=VARCHAR}, </if> 
+		<if test="createAt!= null"> #{createAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="lastUpdateAt!= null"> #{lastUpdateAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="version!= null"> #{version,jdbcType=INTEGER}, </if> 
+		<if test="name!= null"> #{name,jdbcType=VARCHAR}, </if> 
+		<if test="nickname!= null"> #{nickname,jdbcType=VARCHAR}, </if> 
+		<if test="password!= null"> #{password,jdbcType=VARCHAR}, </if> 
+		<if test="registrationAt!= null"> #{registrationAt,jdbcType=TIMESTAMP}, </if> 
+	</trim> 
+</insert> 
+
+<delete id="deleteById">
+	DELETE FROM S_ACCOUNTS WHERE id=#{id,jdbcType=VARCHAR}
+</delete> 
+
+<update id="update"> 
+	UPDATE S_ACCOUNTS set id=#{id,jdbcType=VARCHAR},create_at=#{createAt,jdbcType=TIMESTAMP},last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP},version=#{version,jdbcType=INTEGER},name=#{name,jdbcType=VARCHAR},nickname=#{nickname,jdbcType=VARCHAR},password=#{password,jdbcType=VARCHAR},registration_at=#{registrationAt,jdbcType=TIMESTAMP}, where id=#{id}
+</update> 
+
+<update id="updateSelective"> 
+	UPDATE S_ACCOUNTS set
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> version=#{version,jdbcType=INTEGER}, </if>
+		<if test="name!= null"> name=#{name,jdbcType=VARCHAR}, </if>
+		<if test="nickname!= null"> nickname=#{nickname,jdbcType=VARCHAR}, </if>
+		<if test="password!= null"> password=#{password,jdbcType=VARCHAR}, </if>
+		<if test="registrationAt!= null"> registration_at=#{registrationAt,jdbcType=TIMESTAMP}, </if>
+	</trim>
+	where id=#{id}
+</update> 
+
+<select id="findAll" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from S_ACCOUNTS
+</select> 
+
+<select id="findById" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from S_ACCOUNTS where id=#{id}
+</select>
+
+<select id="findBy" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from S_ACCOUNTS where 1=1
+	<trim prefix="" suffix="" suffixOverrides="," >
+		<if test="id!= null"> AND id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> AND create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> AND last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> AND version=#{version,jdbcType=INTEGER}, </if>
+		<if test="name!= null"> AND name=#{name,jdbcType=VARCHAR}, </if>
+		<if test="nickname!= null"> AND nickname=#{nickname,jdbcType=VARCHAR}, </if>
+		<if test="password!= null"> AND password=#{password,jdbcType=VARCHAR}, </if>
+		<if test="registrationAt!= null"> AND registration_at=#{registrationAt,jdbcType=TIMESTAMP}, </if>
+	</trim>
+</select>
+</mapper>

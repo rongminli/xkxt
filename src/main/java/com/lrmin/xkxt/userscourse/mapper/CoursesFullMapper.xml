@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lrmin.xkxt.userscourse.mapper.CoursesFullMapper"> 
+
+<resultMap id="BaseResultMap" type="com.lrmin.xkxt.userscourse.entity.CoursesFull"> 
+	<result column="course_id" property="courseId" jdbcType="VARCHAR"/>
+	<result column="week_day" property="weekDay" jdbcType="INTEGER"/>
+	<result column="start" property="start" jdbcType="INTEGER"/>
+	<result column="end" property="end" jdbcType="INTEGER"/> 
+	<result column="classroom" property="classroom" jdbcType="VARCHAR"/> 
+	<result column="name" property="name" jdbcType="VARCHAR"/> 
+	<result column="teacher" property="teacher" jdbcType="VARCHAR"/> 
+	<result column="start_rgt" property="startRgt" jdbcType="INTEGER"/> 
+	<result column="end_rgt" property="endRgt" jdbcType="INTEGER"/> 
+</resultMap> 
+
+
+<select id="findUsers" resultMap="BaseResultMap">
+	select c.id, c.name, c.start, c.teacher, c.end, cr.START start_rgt, cr.end end_rgt, cr.classroom, cr.week_day
+	from t_users_courses uc
+	JOIN t_course c ON uc.course_id = c.id
+	JOIN t_course_rgt cr ON cr.course_id = c.id
+	WHERE uc.account_id = #{accountId}
+</select> 
+
+
+</mapper>

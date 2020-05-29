@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lrmin.xkxt.userseduinfo.mapper.UserEduInfoMapper"> 
+
+<resultMap id="BaseResultMap" type="com.lrmin.xkxt.userseduinfo.entity.UserEduInfo"> 
+	<id column="id" property="id" jdbcType="VARCHAR"/> 
+	<result column="create_at" property="createAt" jdbcType="TIMESTAMP"/> 
+	<result column="last_update_at" property="lastUpdateAt" jdbcType="TIMESTAMP"/> 
+	<result column="version" property="version" jdbcType="INTEGER"/> 
+	<result column="user_id" property="userId" jdbcType="VARCHAR"/> 
+	<result column="student_num" property="student_num" jdbcType="VARCHAR"/> 
+	<result column="grade" property="grade" jdbcType="VARCHAR"/> 
+	<result column="college" property="college" jdbcType="VARCHAR"/> 
+	<result column="magor" property="magor" jdbcType="VARCHAR"/> 
+	<result column="class_name" property="className" jdbcType="VARCHAR"/> 
+</resultMap> 
+
+<sql id="baseClumList"> id, create_at, last_update_at, version, user_id, student_num, grade, college, magor, class_name  </sql> 
+
+<insert id="insert"> 
+	INSERT INTO T_USERS_EDU_INFO( <include refid="baseClumList"/> ) VALUES( 
+		#{id,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{lastUpdateAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{student_num,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, #{magor,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR} 
+	) 
+</insert> 
+
+<insert id="insertSelective"> 
+	INSERT INTO T_USERS_EDU_INFO
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> id, </if> 
+		<if test="createAt!= null"> create_at, </if> 
+		<if test="lastUpdateAt!= null"> last_update_at, </if> 
+		<if test="version!= null"> version, </if> 
+		<if test="userId!= null"> user_id, </if> 
+		<if test="student_num!= null"> student_num, </if> 
+		<if test="grade!= null"> grade, </if> 
+		<if test="college!= null"> college, </if> 
+		<if test="magor!= null"> magor, </if> 
+		<if test="className!= null"> class_name, </if> 
+	</trim> 
+	VALUES 
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> #{id,jdbcType=VARCHAR}, </if> 
+		<if test="createAt!= null"> #{createAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="lastUpdateAt!= null"> #{lastUpdateAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="version!= null"> #{version,jdbcType=INTEGER}, </if> 
+		<if test="userId!= null"> #{userId,jdbcType=VARCHAR}, </if> 
+		<if test="student_num!= null"> #{student_num,jdbcType=VARCHAR}, </if> 
+		<if test="grade!= null"> #{grade,jdbcType=VARCHAR}, </if> 
+		<if test="college!= null"> #{college,jdbcType=VARCHAR}, </if> 
+		<if test="magor!= null"> #{magor,jdbcType=VARCHAR}, </if> 
+		<if test="className!= null"> #{className,jdbcType=VARCHAR}, </if> 
+	</trim> 
+</insert> 
+
+<delete id="deleteById">
+	DELETE FROM T_USERS_EDU_INFO WHERE id=#{id,jdbcType=VARCHAR}
+</delete> 
+
+<update id="update"> 
+	UPDATE T_USERS_EDU_INFO set id=#{id,jdbcType=VARCHAR},create_at=#{createAt,jdbcType=TIMESTAMP},last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP},version=#{version,jdbcType=INTEGER},user_id=#{userId,jdbcType=VARCHAR},student_num=#{student_num,jdbcType=VARCHAR},grade=#{grade,jdbcType=VARCHAR},college=#{college,jdbcType=VARCHAR},magor=#{magor,jdbcType=VARCHAR},class_name=#{className,jdbcType=VARCHAR} where id=#{id}
+</update> 
+
+<update id="updateSelective"> 
+	UPDATE T_USERS_EDU_INFO set
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> version=#{version,jdbcType=INTEGER}, </if>
+		<if test="userId!= null"> user_id=#{userId,jdbcType=VARCHAR}, </if>
+		<if test="student_num!= null"> student_num=#{student_num,jdbcType=VARCHAR}, </if>
+		<if test="grade!= null"> grade=#{grade,jdbcType=VARCHAR}, </if>
+		<if test="college!= null"> college=#{college,jdbcType=VARCHAR}, </if>
+		<if test="magor!= null"> magor=#{magor,jdbcType=VARCHAR}, </if>
+		<if test="className!= null"> class_name=#{className,jdbcType=VARCHAR}, </if>
+	</trim>
+	where id=#{id}
+</update> 
+
+<select id="findAll" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_EDU_INFO
+</select> 
+
+<select id="findById" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_EDU_INFO where id=#{id}
+</select> 
+
+<select id="findBy" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_USERS_EDU_INFO where 1=1
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> AND id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> AND create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> AND last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> AND version=#{version,jdbcType=INTEGER}, </if>
+		<if test="userId!= null"> AND user_id=#{userId,jdbcType=VARCHAR}, </if>
+		<if test="student_num!= null"> AND student_num=#{student_num,jdbcType=VARCHAR}, </if>
+		<if test="grade!= null"> AND grade=#{grade,jdbcType=VARCHAR}, </if>
+		<if test="college!= null"> AND college=#{college,jdbcType=VARCHAR}, </if>
+		<if test="magor!= null"> AND magor=#{magor,jdbcType=VARCHAR}, </if>
+		<if test="className!= null"> AND class_name=#{className,jdbcType=VARCHAR}, </if>
+	</trim>
+</select> 
+
+</mapper>

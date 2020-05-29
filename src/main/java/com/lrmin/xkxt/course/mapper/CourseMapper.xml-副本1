@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lrmin.xkxt.course.mapper.CourseMapper"> 
+
+<resultMap id="BaseResultMap" type="com.lrmin.xkxt.course.entity.Course"> 
+	<id column="id" property="id" jdbcType="VARCHAR"/> 
+	<result column="create_at" property="createAt" jdbcType="TIMESTAMP"/> 
+	<result column="last_update_at" property="lastUpdateAt" jdbcType="TIMESTAMP"/> 
+	<result column="version" property="version" jdbcType="INTEGER"/> 
+	<result column="name" property="name" jdbcType="VARCHAR"/> 
+	<result column="teacher" property="teacher" jdbcType="VARCHAR"/> 
+	<result column="time_frame" property="timeFrame" jdbcType="VARCHAR"/> 
+</resultMap> 
+
+<sql id="baseClumList"> id, create_at, last_update_at, version, name, teacher, time_frame  </sql> 
+
+<insert id="insert"> 
+	INSERT INTO T_COURSE( <include refid="baseClumList"/> ) VALUES( 
+		#{id,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{lastUpdateAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR}, #{timeFrame,jdbcType=VARCHAR} 
+	) 
+</insert> 
+
+<insert id="insertSelective"> 
+	INSERT INTO T_COURSE
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> id, </if> 
+		<if test="createAt!= null"> create_at, </if> 
+		<if test="lastUpdateAt!= null"> last_update_at, </if> 
+		<if test="version!= null"> version, </if> 
+		<if test="name!= null"> name, </if> 
+		<if test="teacher!= null"> teacher, </if> 
+		<if test="timeFrame!= null"> time_frame, </if> 
+	</trim> 
+	VALUES 
+	<trim prefix="(" suffix=")" suffixOverrides="," > 
+		<if test="id!= null"> #{id,jdbcType=VARCHAR}, </if> 
+		<if test="createAt!= null"> #{createAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="lastUpdateAt!= null"> #{lastUpdateAt,jdbcType=TIMESTAMP}, </if> 
+		<if test="version!= null"> #{version,jdbcType=INTEGER}, </if> 
+		<if test="name!= null"> #{name,jdbcType=VARCHAR}, </if> 
+		<if test="teacher!= null"> #{teacher,jdbcType=VARCHAR}, </if> 
+		<if test="timeFrame!= null"> #{timeFrame,jdbcType=VARCHAR}, </if> 
+	</trim> 
+</insert> 
+
+<delete id="deleteById">
+	DELETE FROM T_COURSE WHERE id=#{id,jdbcType=VARCHAR}
+</delete> 
+
+<update id="update"> 
+	UPDATE T_COURSE set id=#{id,jdbcType=VARCHAR},create_at=#{createAt,jdbcType=TIMESTAMP},last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP},version=#{version,jdbcType=INTEGER},name=#{name,jdbcType=VARCHAR},teacher=#{teacher,jdbcType=VARCHAR},time_frame=#{timeFrame,jdbcType=VARCHAR} where id=#{id}
+</update> 
+
+<update id="updateSelective"> 
+	UPDATE T_COURSE set
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> version=#{version,jdbcType=INTEGER}, </if>
+		<if test="name!= null"> name=#{name,jdbcType=VARCHAR}, </if>
+		<if test="teacher!= null"> teacher=#{teacher,jdbcType=VARCHAR}, </if>
+		<if test="timeFrame!= null"> time_frame=#{timeFrame,jdbcType=VARCHAR}, </if>
+	</trim>
+	where id=#{id}
+</update> 
+
+<select id="findAll" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_COURSE
+</select> 
+
+<select id="findById" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_COURSE where id=#{id}
+</select> 
+
+<select id="findBy" resultMap="BaseResultMap">
+	select <include refid="baseClumList"/> from T_COURSE where 1=1
+	<trim prefix="" suffix="" suffixOverrides="," > 
+		<if test="id!= null"> AND id=#{id,jdbcType=VARCHAR}, </if>
+		<if test="createAt!= null"> AND create_at=#{createAt,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateAt!= null"> AND last_update_at=#{lastUpdateAt,jdbcType=TIMESTAMP}, </if>
+		<if test="version!= null"> AND version=#{version,jdbcType=INTEGER}, </if>
+		<if test="name!= null"> AND name=#{name,jdbcType=VARCHAR}, </if>
+		<if test="teacher!= null"> AND teacher=#{teacher,jdbcType=VARCHAR}, </if>
+		<if test="timeFrame!= null"> AND time_frame=#{timeFrame,jdbcType=VARCHAR}, </if>
+	</trim>
+</select> 
+
+</mapper>

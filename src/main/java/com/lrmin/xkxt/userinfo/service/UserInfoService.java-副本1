@@ -1,0 +1,42 @@
+package com.lrmin.xkxt.userinfo.service;
+
+import org.springframework.stereotype.Service; 
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import com.lrmin.xkxt.userinfo.mapper.UserInfoMapper;
+import com.lrmin.xkxt.userinfo.entity.UserInfo;
+
+@Service 
+public class UserInfoService {
+	@Autowired
+	private UserInfoMapper mapper;
+
+	public Long update(UserInfo userInfo){
+		return mapper.update(userInfo);
+	}
+
+	public Long insert(UserInfo userInfo){
+		return mapper.insert(userInfo);
+	}
+
+	public Long updateSelective(UserInfo userInfo){
+		return mapper.updateSelective(userInfo);
+	}
+
+	public Long deleteById(String string){
+		return mapper.deleteById(string);
+	}
+
+	public Long insertSelective(UserInfo userInfo){
+		return mapper.insertSelective(userInfo);
+	}
+
+	public List<UserInfo> findAll(){
+		return mapper.findAll();
+	}
+
+	public List<UserInfo> findById(String string){
+		return mapper.findById(string);
+	}
+
+}
