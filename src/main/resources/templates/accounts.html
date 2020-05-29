@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>选课系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+    <link href="../../plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+
+    <!-- App css -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<div th:replace="layout::topbar"></div>
+
+<div th:replace="layout::left-sidenav"></div>
+
+<div class="page-wrapper">
+    <!-- Page Content-->
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">主页</a></li>
+                                    <li class="breadcrumb-item active">用户管理</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">用户管理</h4>
+                        </div><!--end page-title-box-->
+                    </div><!--end col-->
+                </div>
+                <!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table mb-0 table-centered">
+                                        <thead>
+                                        <tr>
+                                            <th>账号</th>
+                                            <th>昵称</th>
+                                            <th>注册时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="account,state : ${entities}">
+                                            <td th:text="${account.name}">
+                                            </td>
+                                            <td th:text="${account.nickname}"></td>
+                                            <td th:text="${#dates.format(account.registrationAt, 'yyyy-MM-dd')}"></td>
+                                            <td>
+<!--                                                <a href="#" th:href="@{'/profile?accountId=' + ${account.id}}" class="mr-2"><i class="fas fa-eye text-info font-16"></i></a>-->
+                                                <a href="#" th:href="@{'/account/del?id=' + ${account.id}}"><i class="fas fa-trash-alt text-danger font-16"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table><!--end /table-->
+                                </div><!--end /tableresponsive-->
+                            </div><!--end card-body-->
+                        </div><!--end card-->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!-- container -->
+
+
+            <div th:replace="layout::footer"></div>
+
+        </div>
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+
+
+
+
+    <!-- jQuery  -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/metismenu.min.js"></script>
+    <script src="../assets/js/waves.js"></script>
+    <script src="../assets/js/feather.min.js"></script>
+    <script src="../assets/js/jquery.slimscroll.min.js"></script>
+    <script src="../assets/js/jquery-ui.min.js"></script>
+
+    <script src="../../plugins/moment/moment.js"></script>
+    <script src="../../plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="../../plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../../plugins/flot-chart/jquery.canvaswrapper.js"></script>
+    <script src="../../plugins/flot-chart/jquery.colorhelpers.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.saturated.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.browser.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.drawSeries.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.uiConstants.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot-dataType.js"></script>
+    <script src="../assets/pages/jquery.crm_dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="../assets/js/app.js"></script>
+
+</body>
+
+</html>

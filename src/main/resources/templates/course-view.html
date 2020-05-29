@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>教务系统-编辑课程</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+    <link href="../../plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+
+    <!-- App css -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<div th:replace="layout::topbar"></div>
+
+<div th:replace="layout::left-sidenav"></div>
+
+<div class="page-wrapper">
+    <!-- Page Content-->
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="float-right">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">主页</a></li>
+                                <li class="breadcrumb-item active">课程明细</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">课程明细</h4>
+                    </div><!--end page-title-box-->
+                </div><!--end col-->
+            </div>
+            <!-- end page title end breadcrumb -->
+
+            <div class="row">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+
+                                    <h4 class="page-title">课程信息</h4>
+                                    <div class="ml-lg-4">
+                                        <label>课程名称：</label><span th:text="${course.name}"></span> <br/>
+                                        <label>任课教师：</label><span th:text="${course.teacher}"></span> <br/>
+                                        <label>上课时间：</label><span th:text="${'第' + course.start + '周   到   第'+ course.end + '周'}"></span> <br/>
+                                    </div>
+
+                                    <h4 class="page-title">课程安排</h4>
+                                    <div class="ml-lg-4" th:each="courseRgt,state : ${courseRgts}">
+                                        <span th:text="${'周' + courseRgt.weekDay +' 第' + courseRgt.start + '节 到 第 '+ courseRgt.end + '节'}"></span> <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="layout::footer"></div>
+
+        </div>
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+
+
+
+
+    <!-- jQuery  -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/metismenu.min.js"></script>
+    <script src="../assets/js/waves.js"></script>
+    <script src="../assets/js/feather.min.js"></script>
+    <script src="../assets/js/jquery.slimscroll.min.js"></script>
+    <script src="../assets/js/jquery-ui.min.js"></script>
+
+    <script src="../../plugins/moment/moment.js"></script>
+    <script src="../../plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="../../plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../../plugins/flot-chart/jquery.canvaswrapper.js"></script>
+    <script src="../../plugins/flot-chart/jquery.colorhelpers.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.saturated.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.browser.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.drawSeries.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot.uiConstants.js"></script>
+    <script src="../../plugins/flot-chart/jquery.flot-dataType.js"></script>
+    <script src="../assets/pages/jquery.crm_dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="../assets/js/app.js"></script>
+
+</body>
+
+</html>
